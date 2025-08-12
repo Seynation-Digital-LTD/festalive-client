@@ -254,14 +254,18 @@ a {
 }
 
 .left-btns{
-width: 100px;
+width: 70px;
 display: flex;
 justify-content: center;
 align-items: center;
-gap: 20px;
+gap: 10px;
 }
 
-
+.btn-section :hover{
+cursor: pointer;
+background-color: #e66400;
+color: white;
+}
 .left-btns-wrapper{
 background-color: #D9D9D9;
 border-style: solid;
