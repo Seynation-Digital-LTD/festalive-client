@@ -169,14 +169,12 @@ a {
   border-radius: 17px;
 }
 
-
 .card-right-2 {
   background-color: var(--orangeOne);
   width: 250px;
   min-height: 400px;
   border-radius: 17px;
 }
-
 
 .card-left,
 .card-right {
@@ -243,14 +241,11 @@ a {
   font-size: 24px;
 }
 
-.btn-section{
-  /* background-color: red; */
-  width: 92%;
+.btn-section {
   display: flex;
-  flex-direction: row;
-  font-size: 15px;
-  font-weight: 300;
-  color: #3b3b3b;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .left-btns{
@@ -266,17 +261,38 @@ cursor: pointer;
 background-color: #e66400;
 color: white;
 }
-.left-btns-wrapper{
-background-color: #D9D9D9;
-border-style: solid;
-border-color: #FFD3B2;
-display: flex;
-padding-left: 20px;
-padding-right: 20px;
-padding-top: 7px;
-padding-bottom: 7px;
-border-radius: 10px;
-gap:0;
+.left-btns-wrapper {
+  background-color: #d9d9d9;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 7px;
+  gap: 8px;
+}
+
+.left-btns-wrapper span {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.left-btns-wrapper select,
+.left-btns-wrapper input,
+.left-btns-wrapper button {
+  border: none;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+}
+.left-btns-wrapper button {
+  background-color: #e66400;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.left-btns-wrapper button:hover {
+  background-color: #cc5700;
 }
 
 .card-content h3 {
@@ -346,7 +362,6 @@ gap:0;
   overflow-x: hidden;
 }
 
-
 .comments-wrapper {
   background-color: #ffede0;
   border-radius: 17px;
@@ -414,4 +429,135 @@ gap:0;
 .comment-content:hover {
   background: rgba(255, 255, 255, 0.7);
   transition: background 0.2s ease;
+}
+
+/* --------------- */
+
+.icon-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn svg {
+  display: block;
+}
+.edit-btn {
+  /* background-color: #4caf50; */
+  color: #4caf50;
+}
+
+.edit-btn:hover {
+  color: black;
+}
+
+/* Delete button */
+.delete-btn {
+  color: #da190b;
+}
+
+.delete-btn:hover {
+   color: black;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal content */
+.modal-content {
+  background-color: white;
+  padding: 20px 25px;
+  border-radius: 12px;
+  min-width: 320px;
+  max-width: 450px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  animation: slideDown 0.3s ease;
+}
+
+/* Modal header */
+.modal-content h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+/* Modal paragraph */
+.modal-content p {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* Modal actions */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Confirm button (Save / Delete) */
+.confirm-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.confirm-btn:hover {
+  background-color: #45a049;
+}
+
+/* Cancel button */
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #da190b;
+}
+
+/* Edit form inside modal */
+.edit-form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.edit-form input,
+.edit-form select {
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 3px;
+  font-size: 14px;
+}
+
+/* Slide down animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

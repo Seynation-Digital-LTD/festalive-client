@@ -300,7 +300,6 @@ button.full-width-btn.finish-btn:hover {
   white-space: nowrap;
 }
 
-
 .step3-wrapper {
   width: 100%;
   max-width: 450px;
@@ -456,7 +455,6 @@ button.full-width-btn.finish-btn:hover {
   }
 }
 
-
 .org--form {
   width: 100%;
   max-width: 300px;
@@ -549,7 +547,6 @@ button.full-width-btn.finish-btn:hover {
     max-width: 90%;
   }
 }
-
 
 /* Responsiveness */
 @media (max-width: 768px) {
