@@ -4,106 +4,83 @@ import "../globals.css";
 import "../components/index.css";
 import "../components/table.css";
 
-interface EventsData {
+interface TicketSalesData {
   id: number;
-  name: string;
+  buyerName: string;
   event: string;
-  ticketType: number;
-  ticketsSold?: number;
-  totalTickets?: number;
-  location?: string;
-  payment: number;
-  status: string;
-  venue: string;
+  ticketType: string;
+  quantity: number;
+  price: number;
+  totalPaid: number;
   date: string;
-  action?: string;
+  paymentStatus: string;
+  paymentMethod?: string;
 }
 
-type EventsTableProps = {
+type TicketSalesTableProps = {
   filters: {
     status: string;
-    date: string; // single or range
-    location: string;
+    date: string;
     search: string;
   };
 };
 
-// Sample Events
-const Events: EventsData[] = [
+// Sample Ticket Sales
+const TicketSales: TicketSalesData[] = [
   {
     id: 1,
-    name: "Apolinary Theonest",
+    buyerName: "Apolinary Theonest",
     event: "Festival A",
-    ticketType: 1,
-    ticketsSold: 120,
-    totalTickets: 150,
-    location: "City life",
-    payment: 3000,
-    status: "LIVE",
-    venue: "Main Hall",
-    date: "2025-08-20",
+    ticketType: "VIP",
+    quantity: 2,
+    price: 1500,
+    totalPaid: 3000,
+    date: "2025-08-15",
+    paymentStatus: "PAID",
+    paymentMethod: "Card",
   },
   {
     id: 2,
-    name: "Jane Doe",
+    buyerName: "Jane Doe",
     event: "Festival B",
-    ticketType: 2,
-    ticketsSold: 50,
-    totalTickets: 100,
-    location: "Beach Arena",
-    payment: 1500,
-    status: "ENDED",
-    venue: "Beach Stage",
-    date: "2025-08-21",
+    ticketType: "Regular",
+    quantity: 1,
+    price: 1500,
+    totalPaid: 1500,
+    date: "2025-08-16",
+    paymentStatus: "REFUNDED",
+    paymentMethod: "M-Pesa",
   },
   {
     id: 3,
-    name: "John Smith",
+    buyerName: "John Smith",
     event: "Music Night",
-    ticketType: 3,
-    ticketsSold: 200,
-    totalTickets: 250,
-    location: "City life",
-    payment: 5000,
-    status: "SOLD-OUT",
-    venue: "Open Ground",
-    date: "2025-08-25",
-  },
-  {
-    id: 4,
-    name: "Ney Smith",
-    event: "Music Night",
-    ticketType: 4,
-    ticketsSold: 200,
-    totalTickets: 250,
-    location: "City life",
-    payment: 5000,
-    status: "UPCOMING",
-    venue: "Open Ground",
-    date: "2025-08-25",
+    ticketType: "Early Bird",
+    quantity: 3,
+    price: 1200,
+    totalPaid: 3600,
+    date: "2025-08-17",
+    paymentStatus: "PAID",
+    paymentMethod: "PayPal",
   },
 ];
 
-export const EventsTable = ({ filters }: EventsTableProps) => {
+export const TicketSalesTable = ({ filters }: TicketSalesTableProps) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [deleteEvent, setDeleteEvent] = useState<EventsData | null>(null);
+  const [deleteSale, setDeleteSale] = useState<TicketSalesData | null>(null);
 
   const [showEditModal, setShowEditModal] = useState(false);
-  const [editEvent, setEditEvent] = useState<EventsData | null>(null);
+  const [editSale, setEditSale] = useState<TicketSalesData | null>(null);
 
-  // ---- Filter Events ----
-  const filteredEvents = Events.filter((event) => {
+  // ---- Filter Ticket Sales ----
+  const filteredSales = TicketSales.filter((sale) => {
     const statusMatch = filters.status
-      ? event.status.toLowerCase() === filters.status.toLowerCase()
-      : true;
-
-    const locationMatch = filters.location
-      ? event.location?.toLowerCase().includes(filters.location.toLowerCase())
+      ? sale.paymentStatus.toLowerCase() === filters.status.toLowerCase()
       : true;
 
     const searchMatch = filters.search
-      ? event.event.toLowerCase().includes(filters.search.toLowerCase()) ||
-        event.name.toLowerCase().includes(filters.search.toLowerCase())
+      ? sale.event.toLowerCase().includes(filters.search.toLowerCase()) ||
+        sale.buyerName.toLowerCase().includes(filters.search.toLowerCase())
       : true;
 
     // Date filter (single or range)
@@ -112,68 +89,68 @@ export const EventsTable = ({ filters }: EventsTableProps) => {
       const rangeParts = filters.date.includes("to")
         ? filters.date.split("to").map((p) => p.trim())
         : [filters.date];
-      const eventDate = new Date(event.date);
+      const saleDate = new Date(sale.date);
 
       if (rangeParts.length === 1) {
         const targetDate = new Date(rangeParts[0]);
-        dateMatch = eventDate.toDateString() === targetDate.toDateString();
+        dateMatch = saleDate.toDateString() === targetDate.toDateString();
       } else if (rangeParts.length === 2) {
         const startDate = new Date(rangeParts[0]);
         const endDate = new Date(rangeParts[1]);
-        dateMatch = eventDate >= startDate && eventDate <= endDate;
+        dateMatch = saleDate >= startDate && saleDate <= endDate;
       }
     }
 
-    return statusMatch && locationMatch && searchMatch && dateMatch;
+    return statusMatch && searchMatch && dateMatch;
   });
 
   // ---- Delete Handlers ----
-  const handleDeleteClick = (event: EventsData) => {
-    setDeleteEvent(event);
+  const handleDeleteClick = (sale: TicketSalesData) => {
+    setDeleteSale(sale);
     setShowDeleteModal(true);
   };
 
   const confirmDelete = () => {
-    if (deleteEvent) {
-      console.log("Deleted event:", deleteEvent);
+    if (deleteSale) {
+      console.log("Deleted sale:", deleteSale);
       // TODO: Implement actual deletion logic
       setShowDeleteModal(false);
-      setDeleteEvent(null);
+      setDeleteSale(null);
     }
   };
 
   const cancelDelete = () => {
     setShowDeleteModal(false);
-    setDeleteEvent(null);
+    setDeleteSale(null);
   };
 
   // ---- Edit Handlers ----
-  const handleEditClick = (event: EventsData) => {
-    setEditEvent(event);
+  const handleEditClick = (sale: TicketSalesData) => {
+    setEditSale(sale);
     setShowEditModal(true);
   };
 
   const handleEditChange = (
-    field: keyof EventsData,
+    field: keyof TicketSalesData,
     value: string | number
   ) => {
-    if (editEvent) {
-      setEditEvent({ ...editEvent, [field]: value });
+    if (editSale) {
+      setEditSale({ ...editSale, [field]: value });
     }
   };
 
   const saveEdit = () => {
-    if (editEvent) {
-      console.log("Saved event:", editEvent);
+    if (editSale) {
+      console.log("Saved sale:", editSale);
       // TODO: Implement actual save logic here
       setShowEditModal(false);
-      setEditEvent(null);
+      setEditSale(null);
     }
   };
 
   const cancelEdit = () => {
     setShowEditModal(false);
-    setEditEvent(null);
+    setEditSale(null);
   };
 
   return (
@@ -182,35 +159,34 @@ export const EventsTable = ({ filters }: EventsTableProps) => {
         <table className="custom-table">
           <thead>
             <tr>
-              <th>Event Name</th>
-              <th>Organizer</th>
+              <th>Buyer</th>
+              <th>Event</th>
+              <th>Ticket Type</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total Paid</th>
               <th>Date</th>
-              <th>Venue</th>
               <th>Status</th>
-              <th>Tickets Sold</th>
-              <th>Revenue</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {filteredEvents.length > 0 ? (
-              filteredEvents.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.event}</td>
-                  <td>{item.name}</td>
-                  <td>{item.date}</td>
-                  <td>{item.venue}</td>
-                  <td>{item.status}</td>
-                  <td>
-                    {item.ticketsSold ?? 0} / {item.totalTickets ?? "-"}
-                  </td>
-                  <td>Tzs. {item.payment}</td>
-
+            {filteredSales.length > 0 ? (
+              filteredSales.map((sale) => (
+                <tr key={sale.id}>
+                  <td>{sale.buyerName}</td>
+                  <td>{sale.event}</td>
+                  <td>{sale.ticketType}</td>
+                  <td>{sale.quantity}</td>
+                  <td>Tzs. {sale.price}</td>
+                  <td>Tzs. {sale.totalPaid}</td>
+                  <td>{sale.date}</td>
+                  <td>{sale.paymentStatus}</td>
                   <td>
                     <button
                       className="icon-btn edit-btn"
                       title="Edit"
-                      onClick={() => handleEditClick(item)}
+                      onClick={() => handleEditClick(sale)}
                     >
                       {/* Pencil Icon */}
                       <svg
@@ -226,7 +202,7 @@ export const EventsTable = ({ filters }: EventsTableProps) => {
                     <button
                       className="icon-btn delete-btn"
                       title="Delete"
-                      onClick={() => handleDeleteClick(item)}
+                      onClick={() => handleDeleteClick(sale)}
                     >
                       {/* Trash Icon */}
                       <svg
@@ -244,12 +220,11 @@ export const EventsTable = ({ filters }: EventsTableProps) => {
                       </svg>
                     </button>
                   </td>
-                
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan={8}>No events found</td>
+                <td colSpan={9}>No sales found</td>
               </tr>
             )}
           </tbody>
@@ -257,13 +232,14 @@ export const EventsTable = ({ filters }: EventsTableProps) => {
       </div>
 
       {/* --- Delete Modal --- */}
-      {showDeleteModal && deleteEvent && (
+      {showDeleteModal && deleteSale && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h4>Delete Event</h4>
+            <h4>Delete Sale</h4>
             <p>
-              Are you sure you want to delete{" "}
-              <strong>{deleteEvent.event}</strong>?
+              Are you sure you want to delete sale for{" "}
+              <strong>{deleteSale.event}</strong> by{" "}
+              <strong>{deleteSale.buyerName}</strong>?
             </p>
             <div className="modal-actions">
               <button className="icon-btn confirm-btn" onClick={confirmDelete}>
@@ -278,81 +254,80 @@ export const EventsTable = ({ filters }: EventsTableProps) => {
       )}
 
       {/* --- Edit Modal --- */}
-      {showEditModal && editEvent && (
+      {showEditModal && editSale && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h4>Edit Event</h4>
+            <h4>Edit Ticket Sale</h4>
             <div className="edit-form">
               <label>
-                Event Name:
+                Buyer:
                 <input
                   type="text"
-                  value={editEvent.event}
+                  value={editSale.buyerName}
+                  onChange={(e) =>
+                    handleEditChange("buyerName", e.target.value)
+                  }
+                />
+              </label>
+              <label>
+                Event:
+                <input
+                  type="text"
+                  value={editSale.event}
                   onChange={(e) => handleEditChange("event", e.target.value)}
                 />
               </label>
               <label>
-                Organizer:
+                Ticket Type:
                 <input
                   type="text"
-                  value={editEvent.name}
-                  onChange={(e) => handleEditChange("name", e.target.value)}
-                />
-              </label>
-              <label>
-                Date:
-                <input
-                  type="date"
-                  value={editEvent.date}
-                  onChange={(e) => handleEditChange("date", e.target.value)}
-                />
-              </label>
-              <label>
-                Venue:
-                <input
-                  type="text"
-                  value={editEvent.venue}
-                  onChange={(e) => handleEditChange("venue", e.target.value)}
-                />
-              </label>
-              <label>
-                Tickets Sold:
-                <input
-                  type="number"
-                  value={editEvent.ticketsSold}
+                  value={editSale.ticketType}
                   onChange={(e) =>
-                    handleEditChange("ticketsSold", parseInt(e.target.value))
+                    handleEditChange("ticketType", e.target.value)
                   }
                 />
               </label>
               <label>
-                Total Tickets:
+                Quantity:
                 <input
                   type="number"
-                  value={editEvent.totalTickets}
+                  value={editSale.quantity}
                   onChange={(e) =>
-                    handleEditChange("totalTickets", parseInt(e.target.value))
+                    handleEditChange("quantity", parseInt(e.target.value))
                   }
                 />
               </label>
               <label>
-                Revenue:
+                Price:
                 <input
                   type="number"
-                  value={editEvent.payment}
+                  value={editSale.price}
                   onChange={(e) =>
-                    handleEditChange("payment", parseInt(e.target.value))
+                    handleEditChange("price", parseInt(e.target.value))
+                  }
+                />
+              </label>
+              <label>
+                Total Paid:
+                <input
+                  type="number"
+                  value={editSale.totalPaid}
+                  onChange={(e) =>
+                    handleEditChange("totalPaid", parseInt(e.target.value))
                   }
                 />
               </label>
               <label>
                 Status:
                 <select
-                  value={editEvent.status}
-                  onChange={(e) => handleEditChange("status", e.target.value)}
+                  value={editSale.paymentStatus}
+                  onChange={(e) =>
+                    handleEditChange("paymentStatus", e.target.value)
+                  }
                 >
                   <option value="PAID">PAID</option>
                   <option value="UNPAID">UNPAID</option>
+                  <option value="REFUNDED">REFUNDED</option>
                 </select>
               </label>
               <div className="modal-actions">

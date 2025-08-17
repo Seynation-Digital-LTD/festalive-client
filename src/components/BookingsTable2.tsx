@@ -2,7 +2,7 @@
 import { useState } from "react";
 import "../globals.css";
 import "../components/index.css";
-import { BookingsTable2 } from "../components/BookingsTable2.tsx";
+import { BookingsTable2 } from "../components/BookingsTable2";
 
 // Filters for Bookings
 const filters = [
@@ -36,7 +36,7 @@ const filters = [
   },
 ];
 
-export default function Bookings() {
+export default function BookingsTable2() {
   const [selectedFilters, setSelectedFilters] = useState({
     status: "",
     event: "",
@@ -68,7 +68,11 @@ export default function Bookings() {
                   <span>{filter.title}</span>
                   <select
                     onChange={(e) => handleChange(filter.id, e.target.value)}
-                    value={selectedFilters[filter.id as keyof typeof selectedFilters] || ""}
+                    value={
+                      selectedFilters[
+                        filter.id as keyof typeof selectedFilters
+                      ] || ""
+                    }
                   >
                     <option value="">All</option>
                     {filter.options?.map((opt) => (
@@ -111,7 +115,8 @@ export default function Bookings() {
         </div>
 
         {/* Bookings table */}
-        <BookingsTable filters={selectedFilters} />
+        <BookingsTable />
+        {/* <BookingsTable filters={selectedFilters} /> */}
       </div>
     </div>
   );

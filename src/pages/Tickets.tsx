@@ -2,32 +2,37 @@
 import { useState } from "react";
 import "../globals.css";
 import "../components/index.css";
-import { BookingsTable2 } from "../components/BookingsTable2.tsx";
+import { TicketSalesTable } from "../components/TicketSalesTable";
 
-// Filters for Bookings
 const filters = [
   {
     id: "status",
     title: "Status",
     type: "select",
-    options: ["Confirmed", "Pending", "Cancelled"],
+    options: ["Paid", "Pending", "Refunded", "Cancelled"],
   },
-  {
-    id: "event",
-    title: "Event",
-    type: "select",
-    options: ["Concert A", "Comedy Night", "Festival X"], // later from API
-  },
+//   {
+//     id: "event",
+//     title: "Event",
+//     type: "select",
+//     options: ["Concert A", "Comedy Night", "Festival X"], 
+//   },
   {
     id: "date",
-    title: "Booking Date",
+    title: "Date",
     type: "date",
+  },
+  {
+    id: "payment",
+    title: "Payment",
+    type: "select",
+    options: ["M-Pesa", "Airtel Money", "Mixx by Yas", "Halopesa", "T-Pesa" ],
   },
   {
     id: "search",
     title: "Search",
     type: "search",
-    placeholder: "Search by user name or email...",
+    placeholder: "Search by buyer name or email...",
   },
   {
     id: "export",
@@ -36,11 +41,12 @@ const filters = [
   },
 ];
 
-export default function Bookings() {
+export default function TicketSales() {
   const [selectedFilters, setSelectedFilters] = useState({
     status: "",
     event: "",
     date: "",
+    payment: "",
     search: "",
   });
 
@@ -49,20 +55,19 @@ export default function Bookings() {
   };
 
   const handleExport = () => {
-    console.log("Exporting bookings with filters:", selectedFilters);
-    // TODO: Hook backend export (CSV/Excel/PDF)
+    console.log("Exporting ticket sales with filters:", selectedFilters);
+    // TODO: Hook into backend export (CSV/Excel/PDF)
   };
 
   return (
     <div className="inner-components">
       <div className="other-card-events">
-        <h4>Bookings</h4>
+        <h4>Ticket Sales</h4>
 
         {/* Filters */}
         <div className="btn-section">
           {filters.map((filter) => (
             <div key={filter.id} className="left-btns-wrapper">
-              {/* Select dropdowns */}
               {filter.type === "select" && (
                 <>
                   <span>{filter.title}</span>
@@ -80,7 +85,6 @@ export default function Bookings() {
                 </>
               )}
 
-              {/* Date picker */}
               {filter.type === "date" && (
                 <>
                   <span>{filter.title}</span>
@@ -92,7 +96,6 @@ export default function Bookings() {
                 </>
               )}
 
-              {/* Search */}
               {filter.type === "search" && (
                 <input
                   type="text"
@@ -102,7 +105,6 @@ export default function Bookings() {
                 />
               )}
 
-              {/* Export button */}
               {filter.type === "button" && (
                 <button onClick={handleExport}>{filter.title}</button>
               )}
@@ -110,8 +112,8 @@ export default function Bookings() {
           ))}
         </div>
 
-        {/* Bookings table */}
-        <BookingsTable filters={selectedFilters} />
+        {/* Ticket Sales Table */}
+        <TicketSalesTable filters={selectedFilters} />
       </div>
     </div>
   );
