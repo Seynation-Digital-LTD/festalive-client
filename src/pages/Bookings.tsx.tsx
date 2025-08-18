@@ -2,7 +2,7 @@
 import { useState } from "react";
 import "../globals.css";
 import "../components/index.css";
-import { BookingsTable2 } from "../components/BookingsTable2.tsx";
+import { BookingsPageTable } from "../components/BookingPageTable.tsx";
 
 // Filters for Bookings
 const filters = [
@@ -12,12 +12,12 @@ const filters = [
     type: "select",
     options: ["Confirmed", "Pending", "Cancelled"],
   },
-  {
-    id: "event",
-    title: "Event",
-    type: "select",
-    options: ["Concert A", "Comedy Night", "Festival X"], // later from API
-  },
+  // {
+  //   id: "event",
+  //   title: "Event",
+  //   type: "select",
+  //   options: ["Concert A", "Comedy Night", "Festival X"], 
+  // },
   {
     id: "date",
     title: "Booking Date",
@@ -111,7 +111,7 @@ export default function Bookings() {
         </div>
 
         {/* Bookings table */}
-        <BookingsTable filters={selectedFilters} />
+        <BookingsPageTable filters={selectedFilters} />
       </div>
     </div>
   );
