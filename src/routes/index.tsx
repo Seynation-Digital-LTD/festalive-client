@@ -12,6 +12,7 @@ const Login  = lazy(() => import("../pages/LoginPage.tsx"));
 const Signup  = lazy(() => import("../pages/SignupPage.tsx"));
 const Home = lazy(() => import("../pages/Home.tsx"));
 const Tickets = lazy(() => import("../pages/Tickets.tsx"));
+const Messages = lazy(()=>import("../pages/Messages.tsx"))
 // const Tickets = lazy(() => import("../pages/Tickets.tsx"));
 const Promote = lazy(() => import("../pages/Promote.tsx"));
 const Events = lazy(()=> import("../pages/Events.tsx"))
@@ -35,6 +36,7 @@ export default function Router() {
           <Route path="promote" element={<Promote />} />
           <Route path="events" element={<Events />} />
           <Route path="bookings" element={<Bookings />} />
+          <Route path="messages" element={<Messages />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
