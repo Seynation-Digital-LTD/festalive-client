@@ -5,14 +5,15 @@
   height: calc(100vh - 100px);
   border: 1px solid #ffd3b2;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 /* === Inbox / MessagesTable === */
 .messages-table {
-  border-right: 1px solid #ff6f00;;
+  border-right: 1px solid #ff6f00;
   padding: 10px;
   overflow-y: auto;
-  border-radius: 10px;
+  border-radius: 10px 0 0 10px;
   background: #ffd3b2;
 }
 
@@ -29,14 +30,20 @@
 }
 
 .message-preview.unread {
-    border-radius: 5px;
+  border-radius: 5px;
   font-weight: bold;
-   background: #fcfce17e;
+  background: #fcfce17e;
 }
 
 .message-preview:hover {
-    border-radius: 5px;
+  border-radius: 5px;
   background: #fcfce161;
+}
+
+.message-preview.active {
+  background: #ffe0c2;
+  border-left: 4px solid #e66400;
+  border-radius: 5px;
 }
 
 .message-sender {
@@ -57,7 +64,26 @@
 }
 
 /* === Thread / MessagesThread === */
+.messages-thread {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fcfce1;
+  border-radius: 0 10px 10px 0;
+}
 
+/* Sticky thread header */
+.thread-header {
+  position: sticky;
+  top: 0;
+  background: #ffe0c2;
+  padding: 12px 15px;
+  font-weight: bold;
+  border-bottom: 1px solid #ffd3b2;
+  z-index: 5;
+}
+
+/* Empty state */
 .empty-thread {
   display: flex;
   align-items: center;
@@ -68,20 +94,14 @@
   font-style: italic;
 }
 
-.messages-thread {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 15px;
-  background: #fcfce1;
-}
-
+/* Messages area */
 .chat-messages {
-  flex-grow: 1;
+  flex: 1;
   overflow-y: auto;
-  margin-bottom: 15px;
+  padding: 15px;
 }
 
+/* Individual chat bubbles */
 .chat-message {
   margin-bottom: 10px;
   max-width: 70%;
@@ -106,7 +126,10 @@
   display: flex;
   gap: 10px;
   border-top: 1px solid #eee;
-  padding-top: 10px;
+  padding: 10px 15px;
+  position: sticky;
+  bottom: 0;
+  background: #fcfce1;
 }
 
 .chat-input input {
@@ -126,12 +149,5 @@
 }
 
 .chat-input button:hover {
-  background: #fe3700
-}
-
-
-.message-preview.active {
-  background: #ffe0c2;
-  border-left: 4px solid #e66400;
-  border-radius: 5px;
+  background: #fe3700;
 }

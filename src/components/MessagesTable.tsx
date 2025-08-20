@@ -1,7 +1,5 @@
 "use client";
 import "../components/messages.css"; 
-import { useState } from "react";
-import { MessagesThread } from "./MessagesThread";
 
 interface MessagePreview {
   id: number;
@@ -37,38 +35,29 @@ const mockMessages: MessagePreview[] = [
   },
 ];
 
-export function MessagesTable() {
-  const [selectedMessageId, setSelectedMessageId] = useState<number | null>(null);
+interface MessagesTableProps {
+  onSelectMessage: (id: number) => void;
+  selectedMessageId: number | null;
+}
 
+export function MessagesTable({ onSelectMessage, selectedMessageId }: MessagesTableProps) {
   return (
-    <div className="messages-layout">
-      {/* Inbox list */}
-      <div className="messages-table">
-        <h3>Inbox</h3>
-        {mockMessages.map((msg) => (
-          <div
-            key={msg.id}
-            className={`message-preview ${
-              msg.unread ? "unread" : ""
-            } ${selectedMessageId === msg.id ? "active" : ""}`}
-            onClick={() => setSelectedMessageId(msg.id)}
-          >
-            <div className="message-sender">{msg.sender}</div>
-            <div className="message-subject">{msg.subject}</div>
-            <div className="message-snippet">{msg.snippet}</div>
-            <div className="message-date">{msg.date}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Thread */}
-      {selectedMessageId ? (
-        <MessagesThread messageId={selectedMessageId} />
-      ) : (
-        <div className="messages-thread">
-          <div className="empty-thread">💬 Select a message from the inbox</div>
+    <div className="messages-table">
+      <h3>Inbox</h3>
+      {mockMessages.map((msg) => (
+        <div
+          key={msg.id}
+          className={`message-preview ${
+            msg.unread ? "unread" : ""
+          } ${selectedMessageId === msg.id ? "active" : ""}`}
+          onClick={() => onSelectMessage(msg.id)}
+        >
+          <div className="message-sender">{msg.sender}</div>
+          <div className="message-subject">{msg.subject}</div>
+          <div className="message-snippet">{msg.snippet}</div>
+          <div className="message-date">{msg.date}</div>
         </div>
-      )}
+      ))}
     </div>
   );
 }

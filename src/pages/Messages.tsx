@@ -13,16 +13,16 @@ export default function Messages() {
     <div className="messages-page">
       <div className="messages-layout">
         {/* Sidebar (Inbox list) */}
-        <MessagesTable onSelectMessage={setSelectedMessageId} />
+        <MessagesTable onSelectMessage={setSelectedMessageId} selectedMessageId={selectedMessageId} />
 
         {/* Thread (Conversation view) */}
-        {selectedMessageId ? (
-          <MessagesThread messageId={selectedMessageId} />
-        ) : (
-          <div className="empty-thread">
-            <p>Select a conversation to view messages</p>
-          </div>
-        )}
+        <div className="messages-thread">
+          {selectedMessageId ? (
+            <MessagesThread messageId={selectedMessageId} />
+          ) : (
+            <div className="empty-thread">💬 Select a conversation to view messages</div>
+          )}
+        </div>
       </div>
     </div>
   );

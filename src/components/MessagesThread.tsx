@@ -1,6 +1,5 @@
 "use client";
 import "../components/messages.css"; 
-
 import { useState, useEffect, useRef } from "react";
 
 interface MessagesThreadProps {
@@ -27,6 +26,13 @@ const mockConversations: Record<number, Message[]> = {
   ],
 };
 
+// Mock subject/sender info for header
+const threadMeta: Record<number, { sender: string; subject: string }> = {
+  1: { sender: "Apolinary Theonest", subject: "VIP Section Inquiry" },
+  2: { sender: "Jane Doe", subject: "Refund Request" },
+  3: { sender: "John Smith", subject: "Showtime Question" },
+};
+
 export function MessagesThread({ messageId }: MessagesThreadProps) {
   const [conversation, setConversation] = useState<Message[]>([]);
   const [reply, setReply] = useState("");
@@ -50,29 +56,34 @@ export function MessagesThread({ messageId }: MessagesThreadProps) {
     setReply("");
   };
 
+  const meta = threadMeta[messageId];
+
   return (
     <div className="messages-thread">
+      {/* Thread header (sticky top) */}
+      <div className="thread-header">
+        <div>{meta.sender}</div>
+        <div style={{ fontSize: "0.85rem", color: "#555" }}>{meta.subject}</div>
+      </div>
+
+      {/* Messages list */}
       <div className="chat-messages">
-        {conversation.length === 0 ? (
-          <div className="empty-thread">💬 Select a message from the inbox</div>
-        ) : (
-          conversation.map((msg, index) => (
-            <div
-              key={index}
-              className={`chat-message ${
-                msg.sender === "You" ? "sent" : "received"
-              }`}
-            >
-              <p>
-                <strong>{msg.sender}:</strong> {msg.text}
-              </p>
-            </div>
-          ))
-        )}
+        {conversation.map((msg, index) => (
+          <div
+            key={index}
+            className={`chat-message ${
+              msg.sender === "You" ? "sent" : "received"
+            }`}
+          >
+            <p>
+              <strong>{msg.sender}:</strong> {msg.text}
+            </p>
+          </div>
+        ))}
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input box */}
+      {/* Input box (sticky bottom) */}
       <div className="chat-input">
         <input
           type="text"
