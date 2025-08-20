@@ -31,7 +31,7 @@
 .message-preview.unread {
     border-radius: 5px;
   font-weight: bold;
-   background: #fcfce1;
+   background: #fcfce17e;
 }
 
 .message-preview:hover {
@@ -127,4 +127,11 @@
 
 .chat-input button:hover {
   background: #fe3700
+}
+
+
+.message-preview.active {
+  background: #ffe0c2;
+  border-left: 4px solid #e66400;
+  border-radius: 5px;
 }
