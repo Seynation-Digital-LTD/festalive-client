@@ -1,16 +1,18 @@
 "use client";
 import "../components/payouts.css";
-import "../components/payouts.css";
-interface PayoutPreview {
+
+export interface PayoutPreview {
   id: number;
   recipient: string;
   event: string;
   amount: string;
   status: "Pending" | "Completed" | "Failed";
   date: string;
+  transactions: string[]; // ✅ added
 }
 
-const mockPayouts: PayoutPreview[] = [
+// ✅ mock data with transactions
+export const mockPayouts: PayoutPreview[] = [
   {
     id: 1,
     recipient: "Apolinary Theonest",
@@ -18,6 +20,7 @@ const mockPayouts: PayoutPreview[] = [
     amount: "$1,200",
     status: "Completed",
     date: "Aug 20",
+    transactions: ["Bank Transfer #1234", "Stripe Processing Fee -$20"],
   },
   {
     id: 2,
@@ -26,6 +29,7 @@ const mockPayouts: PayoutPreview[] = [
     amount: "$500",
     status: "Pending",
     date: "Aug 18",
+    transactions: ["Awaiting bank confirmation"],
   },
   {
     id: 3,
@@ -34,6 +38,7 @@ const mockPayouts: PayoutPreview[] = [
     amount: "$750",
     status: "Failed",
     date: "Aug 15",
+    transactions: ["Bank Transfer Failed #5678", "Retry Scheduled"],
   },
 ];
 
