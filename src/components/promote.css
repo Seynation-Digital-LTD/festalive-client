@@ -1,0 +1,168 @@
+*{
+  font-family: 'Inter';
+}
+
+.promote-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  height: calc(100vh - 100px);
+  border: 1px solid #ffd3b2;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* === Sidebar === */
+.promote-table {
+  background: #ffe9d6;
+  border-right: 2px solid #e66400;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.promote-preview {
+  padding: 12px;
+  margin-bottom: 8px;
+  background: #fff7f2;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.promote-preview:hover {
+  background: #fce4d6;
+}
+
+.promote-event-name {
+  font-weight: bold;
+  color: #e66400;
+}
+.promote-event-date {
+  font-size: 0.85rem;
+  color: #555;
+}
+.promote-event-tickets {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/* === Details Panel === */
+.promote-details {
+  padding: 20px;
+  background: #fcfce1;
+  display: flex;
+  flex-direction: column;
+}
+
+.promote-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.promote-tabs button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #eee;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.promote-tabs button.active {
+  background: #e66400;
+  color: #fff;
+}
+
+.campaigns-tab ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.campaigns-tab li {
+  margin: 8px 0;
+  font-size: 0.9rem;
+}
+
+.start-campaign-btn,
+.download-asset-btn {
+  margin-top: 12px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #e66400;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.start-campaign-btn:hover,
+.download-asset-btn:hover {
+  background: #fe3700;
+}
+
+/* === Empty State === */
+.empty-promote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+/* === Campaign List === */
+.campaign-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+.campaign-item {
+  background: #fff7f2;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  border: 1px solid #ffd3b2;
+}
+
+/* === Campaign Form === */
+.campaign-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.campaign-form input,
+.campaign-form select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.campaign-form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.campaign-form-actions button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.campaign-form-actions button:first-child {
+  background: #e66400;
+  color: white;
+}
+
+.campaign-form-actions button:last-child {
+  background: #ccc;
+}
+
+.empty-campaigns {
+  color: #777;
+  font-style: italic;
+}

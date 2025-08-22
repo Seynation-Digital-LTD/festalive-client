@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { PromoteTable } from "../components";
+import { PromoteTable } from "../components/PromoteTable";
 import { PromoteDetails } from "../components/PromoteDetails";
 import "../globals.css";
 import "../components/index.css";
