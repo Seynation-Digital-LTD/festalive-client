@@ -10,14 +10,15 @@ const OrganizerSignup = lazy(() => import("../pages/SignupOrganizer.tsx"));
 const UserSignup = lazy(() => import("../pages/SignupUser.tsx"));
 const Login = lazy(() => import("../pages/LoginPage.tsx"));
 const Signup = lazy(() => import("../pages/SignupPage.tsx"));
-const Home = lazy(() => import("../pages/Home.tsx"));
+const Home = lazy(() => import("../pages/HomePage.tsx"));
+const HomePage = lazy (()=> import("../pages/Home.tsx"))
 const Tickets = lazy(() => import("../pages/Tickets.tsx"));
 const Messages = lazy(() => import("../pages/Messages.tsx"));
-const Payouts = lazy(()=> import("../pages/Payouts.tsx"));
+const Payouts = lazy(() => import("../pages/Payouts.tsx"));
 // const Tickets = lazy(() => import("../pages/Tickets.tsx"));
-const Promote = lazy(()=> import("../pages/Promote.tsx"));
+const Promote = lazy(() => import("../pages/Promote.tsx"));
 const Events = lazy(() => import("../pages/Events.tsx"));
-const Bookings = lazy(()=> import("../pages/Bookings.tsx"))
+const Bookings = lazy(() => import("../pages/Bookings.tsx"));
 const NotFound = lazy(() => import("../pages/NotFound.tsx"));
 
 export default function Router() {
@@ -26,13 +27,14 @@ export default function Router() {
       <Routes>
         <Route path="/signup-user/" element={<SelectUserType />} />
         <Route path="/signup/creator" element={<CreatorSignUp />} />
+        <Route path="/homepage" element={<HomePage   />} />
         <Route path="/signup/organizer" element={<OrganizerSignup />} />
         <Route path="/signup/user" element={<UserSignup />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<HomePage />} />
           <Route path="tickets" element={<Tickets />} />
           <Route path="promote" element={<Promote />} />
           <Route path="events" element={<Events />} />
