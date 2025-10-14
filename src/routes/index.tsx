@@ -28,6 +28,7 @@ export default function Router() {
         <Route path="/signup-user/" element={<SelectUserType />} />
         <Route path="/signup/creator" element={<CreatorSignUp />} />
         <Route path="/homepage" element={<HomePage   />} />
+        <Route path="/home" element={<Home   />} />
         <Route path="/signup/organizer" element={<OrganizerSignup />} />
         <Route path="/signup/user" element={<UserSignup />} />
         <Route path="/auth" element={<Auth />} />

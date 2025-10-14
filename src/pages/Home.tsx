@@ -24,6 +24,5 @@ export default function Home() {
         <Comments />
       </div>
       </>
-  
   );
 }
