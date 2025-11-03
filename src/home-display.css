@@ -1,62 +1,198 @@
-.diplay-main{
-   background-color: #FFEDE0;
-    display: flex;
-    height:  500px;
-    flex-direction: row;
-    border-radius: 10px;
-    padding: 10px;
-    stroke:black;
-    border-style:outset;
-    border-color: var(--orangeThree);
+:root {
+  --orangeOne: #ffede0;
+  --orangeTwo: #ff8a3d;
+  --orangeThree: #ff6600;
+  --foreground: #2c2c2c;
 }
 
-.right{
-    display: flex;
-    flex:1;
-    padding-top: 10px;
-    border-radius: 10px;
-    border-style:outset;
-    border-color: red;
-    /* background-color: blue; */
- 
+/* ---------- HERO SECTION ---------- */
+.display-main {
+  background-color: var(--orangeOne);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 500px;
+  border-radius: 12px;
+  padding: 30px;
+  gap: 20px;
 }
 
-.left{
-    display: flex;
-    flex:1;
-    align-items: center;
-    justify-content: start;
-    /* background-color: aquamarine; */
+.left {
+  flex: 1;
+  display: flex;
+  align-items: center;
 }
 
-.left-contents{
-    display: flex;
-    margin-left: 50px;
-    flex-direction: column;
+.left-contents {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.left-contents h3{
-    font-size: 40px;
+.left-contents h3 {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
 }
 
-.left-content-buttons{
-display: flex;
-flex:1;
-justify-content: start;
-flex-direction: row;
+.sub-text {
+  font-size: 18px;
+  color: #444;
+  max-width: 400px;
 }
 
-.button-left{
-    background-color: red;
+.left-content-buttons {
+  display: flex;
+  gap: 12px;
 }
 
 .left-content-buttons button {
-  background-color: #ff6600;
-  color: white;
+  padding: 10px 18px;
   border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  white-space: nowrap;
+  font-weight: 600;
 }
 
+.button-left {
+  background-color: var(--orangeThree);
+  color: white;
+  border: 2px solid var(--orangeTwo);
+}
+
+.button-left:hover {
+  background-color: var(--orangeTwo);
+}
+
+.button-right {
+  background-color: var(--foreground);
+  color: white;
+  border: 2px solid var(--orangeTwo);
+}
+
+.button-right:hover {
+  background-color: var(--orangeTwo);
+}
+
+.right {
+  flex: 1;
+  /* border: 2px solid red; Temporary to visualize image boundaries */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This makes the image FIT perfectly */
+  border-radius: 10px;
+}
+
+/* ---------- SHOWCASE SECTION ---------- */
+.main-display-showcase {
+  padding: 60px 20px;
+  background-color: #fff;
+}
+
+.showcase-heading {
+  font-size: 28px;
+  text-align: start;
+  margin-bottom: 15px;
+  color: var(--foreground);
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 10px;
+  justify-items: center;
+}
+
+.display-item {
+  background-color: var(--orangeOne);
+  border-radius: 10px;
+  overflow: hidden;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+  transition: transform 0.3s ease;
+  width: 100%;
+  max-width: 520px;
+}
+
+.display-item:hover {
+/* background-color: var(--orangeOne); */
+  transform: translateY(-2px);
+}
+
+.display-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.item-content {
+  padding: 15px;
+  text-align: left;
+}
+
+.item-content h6 {
+  font-size: 10px;
+  font-weight: 400;
+  border: solid;
+  border-radius: 5px;
+  padding: 5px;
+  /* max-width: 30%; */
+  border-color: #ff6600;
+  margin-bottom: 8px;
+}
+.item-content h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.item-content p {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.item-content .button-left {
+  padding: 7px 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.item-content .button-left:hover {
+  background-color: var(--orangeTwo);
+}
+
+.price-date-venue{
+    display: flex;
+    flex-direction: row;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .display-main {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  .right {
+    height: 300px;
+  }
+
+  .left-contents h3 {
+    font-size: 32px;
+  }
+
+  .sub-text {
+    font-size: 16px;
+  }
+}

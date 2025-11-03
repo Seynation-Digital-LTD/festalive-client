@@ -1,12 +1,13 @@
-import { useState } from "react";
 import { Navbar } from "../components/Navbar";
-import { HomeDiplay } from "../components/HomeDisplay";
+import { HomeDisplay } from "../components/HomeDisplay";
+import { EventsDisplay } from "../components/EventsDisplay";
 
 export default function HomePage() {
   return (
     <section className="homepage-section">
       <Navbar />
-      <HomeDiplay/>
+      <HomeDisplay/>
+      <EventsDisplay/>
     </section>
   );
 }
