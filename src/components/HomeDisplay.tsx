@@ -22,8 +22,8 @@ export const HomeDisplay = () => {
             Discover trending events and top creators all in one place.
           </p>
           <div className="left-content-buttons">
-            <button className="button-left">Explore Events</button>
-            <button className="button-right">Explore Creators</button>
+            <button className="button-left">Buy Tickets</button>
+            <button className="button-right">Book Creator</button>
           </div>
         </div>
       </div>
