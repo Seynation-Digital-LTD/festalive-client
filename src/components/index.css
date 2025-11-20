@@ -19,19 +19,94 @@
 .sidebar {
   background-color: var(--orangeOne);
   width: 248px;
-  flex-shrink: 0;
   height: 100vh;
-  border-radius: 15px 0 0 15px;
+  border-top-right-radius: 27px;
+  border-bottom-right-radius: 17px;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  /* position: relative; */
   position: sticky;
   top: 0;
+  transition: width 0.3s ease, transform 0.3s ease;
+  z-index: 100;
 }
 
 .sidebar.collapsed {
-  width: 80px; 
+  width: 80px;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px 0px 20px;
+  position: relative;
+}
+
+.sidebar-toggle-desktop {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--orangeThree);
+  display: block;
+  position: absolute;
+  right: 10px;
+}
+
+.sidebar-toggle-mobile {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1001;
+  background-color: var(--orangeThree);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Profile Card Collapsed */
+.profile-card-contents.collapsed {
+  padding: 10px;
+  justify-content: center;
+}
+
+.profile-card-contents.collapsed .profile-item {
+  align-items: center;
+}
+
+.profile-card-contents.collapsed img {
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    transform: translateX(-100%);
+    width: 250px;
+    border-radius: 0;
+  }
+
+  .sidebar.collapsed {
+    transform: translateX(0);
+    width: 250px; /* Full width on mobile when open */
+  }
+  
+  .sidebar-toggle-desktop {
+    display: none; /* Hide desktop toggle on mobile */
+  }
+
+  .sidebar-toggle-mobile {
+    display: block;
+  }
 }
 
 .sidebar::-webkit-scrollbar {
@@ -319,7 +394,7 @@ color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 5px 20px 20px 20px;
 }
 
 .profile-item {

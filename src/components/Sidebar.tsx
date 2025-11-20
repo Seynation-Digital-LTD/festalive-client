@@ -4,6 +4,12 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { ProfileCard } from "./ProfileCard";
 
+// Assuming ProfileCard is in the same file or imported. 
+// Wait, ProfileCard is imported. I need to check if ProfileCard accepts props.
+// I'll assume I need to update ProfileCard.tsx as well.
+// For now, let's just pass the prop in Sidebar.tsx and I'll update ProfileCard.tsx in the next step.
+
+
 export const SidebarData = [
   {
     id: 1,
@@ -72,44 +78,66 @@ export const SidebarData = [
 
 export const Sidebar = () => {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [collapsed, setCollapsed] = useState(false);
+
+  const toggleSidebar = () => {
+    setCollapsed(!collapsed);
+  };
 
   return (
-    <div className="sidebar">
-      <div className="sidebar-content">
-        <ProfileCard />
-        <div className="sidebar-content-container">
-          <ul>
-            {SidebarData.map((item) => (
-              <li
-                key={item.id}
-                onMouseEnter={() => setHoveredId(item.id)}
-                onMouseLeave={() => setHoveredId(null)}
-              >
-                <NavLink
-                  to={item.link}
-                  className={({ isActive }) =>
-                    isActive ? "sidebar-items activeItem" : "sidebar-items"
-                  }
+    <>
+      <button 
+        className="sidebar-toggle-mobile" 
+        onClick={toggleSidebar}
+        aria-label="Toggle Sidebar"
+      >
+        ☰
+      </button>
+      <div className={`sidebar ${collapsed ? "collapsed" : ""}`}>
+        <div className="sidebar-header">
+          <NavLink to="/" className="sidebar-brand" style={{ textDecoration: 'none', color: 'inherit' }}>
+             {collapsed ? <h2 style={{ margin: 0, color: 'var(--orangeThree)' }}>F</h2> : <h2 style={{ margin: 0, color: 'var(--orangeThree)' }}>Festalive</h2>}
+          </NavLink>
+           <button className="sidebar-toggle-desktop" onClick={toggleSidebar}>
+            {collapsed ? "»" : "«"}
+          </button>
+        </div>
+        <div className="sidebar-content">
+          <ProfileCard collapsed={collapsed} />
+          <div className="sidebar-content-container">
+            <ul>
+              {SidebarData.map((item) => (
+                <li
+                  key={item.id}
+                  onMouseEnter={() => setHoveredId(item.id)}
+                  onMouseLeave={() => setHoveredId(null)}
                 >
-                  <div className="sidebar-item">
-                    <img
-                      src={
-                        hoveredId === item.id || window.location.pathname === item.link
-                          ? item.iconactive
-                          : item.icon
-                      }
-                      alt={item.title}
-                      width={20}
-                      height={20}
-                    />
-                    <span style={{ marginLeft: "5px" }}>{item.title}</span>
-                  </div>
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+                  <NavLink
+                    to={item.link}
+                    className={({ isActive }) =>
+                      isActive ? "sidebar-items activeItem" : "sidebar-items"
+                    }
+                  >
+                    <div className="sidebar-item" title={collapsed ? item.title : ""}>
+                      <img
+                        src={
+                          hoveredId === item.id || window.location.pathname === item.link
+                            ? item.iconactive
+                            : item.icon
+                        }
+                        alt={item.title}
+                        width={20}
+                        height={20}
+                      />
+                      {!collapsed && <span style={{ marginLeft: "10px" }}>{item.title}</span>}
+                    </div>
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
