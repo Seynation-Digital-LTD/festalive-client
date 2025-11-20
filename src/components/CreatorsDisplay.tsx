@@ -1,134 +1,56 @@
 "use client";
 import "../globals.css";
 import "../home-display.css";
+import { Link } from "react-router-dom";
 
-export const EventsDisplayData = [
+export const CreatorsDisplayData = [
   {
     id: 1,
-     startingprice:'10,000',
-    endingprice:'50,000',
-    date:'2/3/2026',
-    time:'1O AM',
-    venue:"Mlimani City",
-    title: "Afro Music Fest",
+    name: "Seynation Digital",
+    role: "Music Producer",
     profile: "../assets/profile.jpg",
-    desc: "A celebration of African music and culture.",
-    alt: "Afro Fest",
-    img: "../assets/event1.jpg",
+    desc: "Creating beats that move the soul.",
   },
   {
     id: 2,
-     startingprice:'10,000',
-    endingprice:'50,000',
-    date:'2/3/2026',
-    time:'1O AM',
+    name: "Tech Innovators",
+    role: "Tech Community",
     profile: "../assets/profile.jpg",
-    venue:"Mlimani City",
-    title: "Tech Innovators Meetup",
-    desc: "Networking event for tech founders and developers.",
-    alt: "Tech Event",
-    img: "../assets/event2.jpg",
+    desc: "Connecting tech minds across the region.",
   },
   {
     id: 3,
-    startingprice:'10,000',
-    endingprice:'50,000',
-    date:'2/3/2026',
-    time:'1O AM',
-    venue:"Mlimani City",
+    name: "Artistic Souls",
+    role: "Visual Artists",
     profile: "../assets/profile.jpg",
-    title: "Street Art Expo",
-    desc: "Experience raw creativity from emerging artists.",
-    alt: "Art Expo",
-    img: "../assets/event3.jpg",
+    desc: "Expressing emotions through colors.",
   },
   {
     id: 4,
-     startingprice:'10,000',
-    endingprice:'50,000',
-    date:'2/3/2026',
-    time:'1O AM',
-    venue:"Mlimani City",
+    name: "Influencer Hub",
+    role: "Content Creators",
     profile: "../assets/profile.jpg",
-    title: "Influencer Brunch",
-    desc: "Connect with content creators and brand storytellers.",
-    alt: "Creator Brunch",
-    img: "../assets/event1.jpg",
-  },
-  {
-    id: 5,
-     startingprice:'10,000',
-    endingprice:'50,000',
-    date:'2/3/2026',
-    time:'1O AM',
-    venue:"Mlimani City",
-    title: "Afro Music Fest",
-    profile: "../assets/profile.jpg",
-    desc: "A celebration of African music and culture.",
-    alt: "Afro Fest",
-    img: "../assets/event1.jpg",
-  },
-  {
-    id: 6,
-     startingprice:'10,000',
-    endingprice:'50,000',
-    date:'2/3/2026',
-    time:'1O AM',
-    profile: "../assets/profile.jpg",
-    venue:"Mlimani City",
-    title: "Tech Innovators Meetup",
-    desc: "Networking event for tech founders and developers.",
-    alt: "Tech Event",
-    img: "../assets/event2.jpg",
-  },
-  {
-    id: 7,
-    startingprice:'10,000',
-    endingprice:'50,000',
-    date:'2/3/2026',
-    time:'1O AM',
-    venue:"Mlimani City",
-    profile: "../assets/profile.jpg",
-    title: "Street Art Expo",
-    desc: "Experience raw creativity from emerging artists.",
-    alt: "Art Expo",
-    img: "../assets/event3.jpg",
-  },
-  {
-    id: 8,
-     startingprice:'10,000',
-    endingprice:'50,000',
-    date:'2/3/2026',
-    time:'1O AM',
-    venue:"Mlimani City",
-    profile: "../assets/profile.jpg",
-    title: "Influencer Brunch",
-    desc: "Connect with content creators and brand storytellers.",
-    alt: "Creator Brunch",
-    img: "../assets/event1.jpg",
+    desc: "Sharing stories that matter.",
   },
 ];
 
-export const EventsDisplay = () => {
+export const CreatorsDisplay = () => {
   return (
     <section className="main-display-showcase">
-      <h2 className="showcase-heading">Featured Events</h2>
+      <h2 className="showcase-heading">Featured Creators</h2>
       <div className="showcase-grid">
-        {EventsDisplayData.map((item) => (
-          <div className="display-item" key={item.id}>
-            <img className="display-img" src={item.img} alt={item.alt} />
-            <div className="item-content">
-            
-              <h3>{item.title}</h3>
+        {CreatorsDisplayData.map((item) => (
+          <div className="creator-card" key={item.id}>
+            <div className="creator-img-wrapper">
+              <img className="creator-img" src={item.profile} alt={item.name} />
+            </div>
+            <div className="creator-content">
+              <h3>{item.name}</h3>
+              <h5>{item.role}</h5>
               <p>{item.desc}</p>
-              <div className="price-date-venue">
-                 <h6>Tzs. {item.startingprice} - {item.endingprice}</h6>
-                 <h6>{item.venue}</h6>
-                 <h6>{item.date}</h6>
-                 <h6>{item.time}</h6>
-              </div>
-              {/* <h6>Tzs. {item.startingprice} - {item.endingprice}</h6> */}
-              <button className="button-left">Buy Tickets</button>
+              <Link to={`/creator/${item.id}`}>
+                <button className="button-left">View Profile</button>
+              </Link>
             </div>
           </div>
         ))}

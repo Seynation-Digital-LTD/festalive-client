@@ -11,14 +11,12 @@ const UserSignup = lazy(() => import("../pages/SignupUser.tsx"));
 const Login = lazy(() => import("../pages/LoginPage.tsx"));
 const Signup = lazy(() => import("../pages/SignupPage.tsx"));
 const Home = lazy(() => import("../pages/HomePage.tsx"));
-const HomePage = lazy (()=> import("../pages/Home.tsx"))
-const Tickets = lazy(() => import("../pages/Tickets.tsx"));
-const Messages = lazy(() => import("../pages/Messages.tsx"));
-const Payouts = lazy(() => import("../pages/Payouts.tsx"));
-// const Tickets = lazy(() => import("../pages/Tickets.tsx"));
-const Promote = lazy(() => import("../pages/Promote.tsx"));
 const Events = lazy(() => import("../pages/Events.tsx"));
 const Bookings = lazy(() => import("../pages/Bookings.tsx"));
+const Revenue = lazy(() => import("../pages/Revenue.tsx"));
+const Settings = lazy(() => import("../pages/Settings.tsx"));
+const Creators = lazy(() => import("../pages/Creators.tsx"));
+const CreatorProfilePage = lazy(() => import("../pages/CreatorProfilePage.tsx"));
 const NotFound = lazy(() => import("../pages/NotFound.tsx"));
 
 export default function Router() {
@@ -35,15 +33,15 @@ export default function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="tickets" element={<Tickets />} />
-          <Route path="promote" element={<Promote />} />
+          <Route index element={<Home />} />
           <Route path="events" element={<Events />} />
+          <Route path="creators" element={<Creators />} />
           <Route path="bookings" element={<Bookings />} />
-          <Route path="messages" element={<Messages />} />
-          <Route path="payouts" element={<Payouts />} />
+          <Route path="revenue" element={<Revenue />} />
+          <Route path="settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
         </Route>
+        <Route path="/creator/:id" element={<CreatorProfilePage />} />
       </Routes>
     </Suspense>
   );
