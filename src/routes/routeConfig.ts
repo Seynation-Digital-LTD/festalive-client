@@ -1,4 +1,4 @@
 export const routes = [
-  { path: "/", element: <Dashboard />, protected: true },
-  { path: "/events", element: <Events />, protected: true },
+  // { path: "/dashboard", element: <Dashboard />, protected: true },
+  // { path: "/dashboard/events", element: <Events />, protected: true },
 ];

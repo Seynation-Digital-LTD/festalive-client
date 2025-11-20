@@ -1,6 +1,7 @@
 "use client";
 import "../globals.css";
 import "../navbar.css";
+import { NavLink } from "react-router-dom";
 
 export const Navbar = () => {
   return (
@@ -14,8 +15,12 @@ export const Navbar = () => {
         </ul>
       </nav>
       <div className="nav-auth-buttons">
-        <h6>Login</h6>
-        <button>Get Started</button>
+        <NavLink to="/login">
+          <h6>Login</h6>
+        </NavLink>
+        <NavLink to="/signup">
+          <button>Get Started</button>
+        </NavLink>
       </div>
     </div>
   );

@@ -3,13 +3,14 @@ import { useState } from "react";
 import "../globals.css";
 import "../components/index.css";
 import "../pages/auth.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,6 +32,7 @@ export default function LoginPage() {
     if (Object.keys(newErrors).length === 0) {
       
       console.log("Logging in:", { email, password });
+      navigate("/dashboard");
     }
   };
 

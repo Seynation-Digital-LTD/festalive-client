@@ -27,14 +27,14 @@ export default function Router() {
       <Routes>
         <Route path="/signup-user/" element={<SelectUserType />} />
         <Route path="/signup/creator" element={<CreatorSignUp />} />
-        <Route path="/homepage" element={<HomePage   />} />
-        <Route path="/home" element={<Home   />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/signup/organizer" element={<OrganizerSignup />} />
         <Route path="/signup/user" element={<UserSignup />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/" element={<Layout />}>
+        <Route path="/dashboard" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="tickets" element={<Tickets />} />
           <Route path="promote" element={<Promote />} />
